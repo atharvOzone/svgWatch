@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Watch- Digilog</title>
+    <style>
+      body {
+        background-color: orange;
+        margin: 0;
+        margin-top: 22%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="200" height="200" viewBox="-100 -100 200 200">
+      <!-- For minutes -->
+      <circle
+        cx="0"
+        cy="0"
+        r="90"
+        fill="transparent"
+        stroke="black"
+        stroke-dasharray="0.2 0.8"
+        pathLength="60"
+        stroke-dashoffset="0.1"
+        stroke-width="9"
+      />
+
+      <!-- for hours -->
+      <circle
+        cx="0"
+        cy="0"
+        r="90"
+        fill="transparent"
+        stroke="white"
+        stroke-width="9"
+        stroke-dasharray="0.2 4.8"
+        stroke-dashoffset="0.1"
+        pathLength="60"
+      />
+
+      <!-- Hour hand -->
+      <g id="hour_hand">
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="-50"
+          class="minHand"
+          stroke="black"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+
+        <line
+          x1="0"
+          y1="-12"
+          x2="0"
+          y2="-50"
+          class="hourHand"
+          stroke="black"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+      </g>
+
+      <!-- Minute hand -->
+      <g id="minute_hand">
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="-80"
+          stroke="black"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+        <line
+          x1="0"
+          y1="-12"
+          x2="0"
+          y2="-80"
+          stroke="black"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+      </g>
+
+      <!-- Second Hand -->
+      <g id="second_hand">
+        <line
+          x1="0"
+          y1="12"
+          x2="0"
+          y2="-80"
+          stroke="red"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </g>
+
+      <circle r="3" fill="#7b0828" stroke-width="2" stroke="white" />
+    </svg>
+
+    <script>
+      const hourElement = document.getElementById("hour_hand");
+      const minuteElement = document.getElementById("minute_hand");
+      const secondElement = document.getElementById("second_hand");
+
+      function callDate() {
+        const date = new Date();
+
+        const hour = date.getHours();
+        const min = date.getMinutes();
+        const sec = date.getSeconds();
+
+        hourElement.setAttribute("transform", `rotate(${(360 / 12) * hour})`);
+        minuteElement.setAttribute("transform", `rotate(${(360 / 60) * min})`);
+        secondElement.setAttribute("transform", `rotate(${(360 / 60) * sec})`);
+        requestAnimationFrame(callDate);
+      }
+
+      requestAnimationFrame(callDate);
+    </script>
+  </body>
+</html>
